@@ -73,42 +73,46 @@ export default function Navbar() {
         />
       </button>
       {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-[#1B0D00]/95 shadow-lg">
-          <ul
-            className="flex flex-col items-center gap-4 py-4 font-bold"
-            style={{
-              color: "white",
-              fontFamily: '"Road Rage", sans-serif',
-              fontSize: "28px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "normal",
-            }}
-          >
-            <li>
-              <Link href="/" onClick={() => setMenuOpen(false)}>
-          HOME
-              </Link>
-            </li>
-            <li>
-              <Link href="#subjects" onClick={() => setMenuOpen(false)}>
-          SUBJECTS
-              </Link>
-            </li>
-            <li>
-              <Link href="#contribute" onClick={() => setMenuOpen(false)}>
-          CONTRIBUTE
-              </Link>
-            </li>
-            <li>
-              <Link href="#sponsor" onClick={() => setMenuOpen(false)}>
-          SPONSOR
-              </Link>
-            </li>
-          </ul>
-        </div>
-      )}
+      <div 
+        className={`md:hidden absolute top-full left-0 w-full bg-[#1B0D00]/95 shadow-lg transition-all duration-300 origin-top ${
+          menuOpen 
+            ? "opacity-100 scale-y-100" 
+            : "opacity-0 scale-y-0 pointer-events-none"
+        }`}
+      >
+        <ul
+          className="flex flex-col items-center gap-4 py-4 font-bold"
+          style={{
+            color: "white",
+            fontFamily: '"Road Rage", sans-serif',
+            fontSize: "28px",
+            fontStyle: "normal",
+            fontWeight: 400,
+            lineHeight: "normal",
+          }}
+        >
+          <li>
+            <Link href="/" onClick={() => setMenuOpen(false)}>
+        HOME
+            </Link>
+          </li>
+          <li>
+            <Link href="#subjects" onClick={() => setMenuOpen(false)}>
+        SUBJECTS
+            </Link>
+          </li>
+          <li>
+            <Link href="#contribute" onClick={() => setMenuOpen(false)}>
+        CONTRIBUTE
+            </Link>
+          </li>
+          <li>
+            <Link href="#sponsor" onClick={() => setMenuOpen(false)}>
+        SPONSOR
+            </Link>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 }
