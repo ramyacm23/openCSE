@@ -32,7 +32,7 @@ export default function HeroSection() {
       <div className="relative z-10 px-2 sm:px-4 md:px-6 lg:px-8">
         <h1
           className={`font-bold ${roadRage.variable} text-black text-center 
-            text-8xl sm:text-6xl md:text-5xl lg:text-[90px] xl:text-[112px] 
+            text-7xl sm:text-6xl md:text-5xl lg:text-[90px] xl:text-[112px] 
             leading-snug sm:leading-tight md:leading-tight lg:leading-[95px] xl:leading-[102px] pt-6 sm:pt-8 md:pt-10 lg:pt-[70px]`}
           style={{
             fontFamily: "var(--font-road-rage), 'Road Rage', cursive",
@@ -45,7 +45,7 @@ export default function HeroSection() {
         </h1>
 
         <p
-          className="mt-6 sm:mt-6 text-2xl sm:text-lg md:text-2xl lg:text-3xl xl:text-[45px] text-black"
+          className="mt-6 sm:mt-6 text-xl sm:text-lg md:text-2xl lg:text-3xl xl:text-[45px] text-black"
           style={{ fontFamily: "'Rockwell', 'Serif', serif" }}
         >
           Free, open, and beginner-friendly documentation

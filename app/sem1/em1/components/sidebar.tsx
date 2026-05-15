@@ -29,6 +29,22 @@ export default function Sidebar() {
     { id: "ch4", title: "Laplace Transforms" },
   ];
 
+    // Map your subject path prefix → quiz slug
+    // Adjust the key to match whatever segment identifies the subject in the URL
+    const quizSlugMap: Record<string, string> = {
+      c: "c-programming",
+      em1: "em1",
+      ep: "ep",
+      em2: "em2",
+      oops: "oops",
+    };
+
+    // Derive subject from pathname, e.g. /sem1/c/ch2 → "c"
+    const subjectKey = pathname.split("/")[2] ?? "";
+    const quizSlug = quizSlugMap[subjectKey];
+    const quizHref = quizSlug ? `/quiz/${quizSlug}` : "/quiz";
+    const quizActive = pathname.startsWith("/quiz");
+
   return (
     <>
       {/* Backdrop overlay - only on mobile when open */}
@@ -68,6 +84,36 @@ export default function Sidebar() {
             );
           })}
         </ul>
+
+        <div className="border-t-4 border-[#1B0D00]">
+          <h2
+            className="flex items-center text-2xl font-normal pt-3 pl-3 mb-2 bg-[#cebb9c] text-[#1B0D00] pb-2"
+            style={{ fontFamily: "Rockwell, Serif, serif" }}
+          >
+            Quiz
+          </h2>
+          <Link
+            href={quizHref}
+            className={`flex items-center gap-2 px-3 py-2 text-xl transition ${
+              quizActive ? "bg-[#fccc7e]" : "hover:bg-[#ffdda7af]"
+            } ${righteous.className}`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 shrink-0"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
+            </svg>
+            Take the Quiz
+          </Link>
+        </div>
       </aside>
 
       {/* Toggle Button */}
