@@ -4,10 +4,10 @@ import { Ch1Content } from "../content/chapter1";
 import { Ch2Content } from "../content/chapter2";
 import { Ch3Content } from "../content/chapter3";
 import { Ch4Content } from "../content/chapter4";
-// import { Ch5Content } from "../content/chapter5";
-// import { Ch6Content } from "../content/chapter6";
-// import { Ch7Content } from "../content/chapter7";
-// import { Ch8Content } from "../content/chapter8";
+import { Ch5Content } from "../content/chapter5";
+import { Ch6Content } from "../content/chapter6";
+import { Ch7Content } from "../content/chapter7";
+import { Ch8Content } from "../content/chapter8";
 
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { Righteous } from "next/font/google";
@@ -46,29 +46,29 @@ const chapters = [
     component: Ch4Content,
   },
 
-  // {
-  //   id: "ch5",
-  //   title: "Deadlocks",
-  //   component: Ch5Content,
-  // },
+  {
+    id: "ch5",
+    title: "Deadlocks",
+    component: Ch5Content,
+  },
 
-  // {
-  //   id: "ch6",
-  //   title: "Memory Management",
-  //   component: Ch6Content,
-  // },
+  {
+    id: "ch6",
+    title: "Memory Management",
+    component: Ch6Content,
+  },
 
-  // {
-  //   id: "ch7",
-  //   title: "Paging and Segmentation",
-  //   component: Ch7Content,
-  // },
+  {
+    id: "ch7",
+    title: "Paging and Segmentation",
+    component: Ch7Content,
+  },
 
-  // {
-  //   id: "ch8",
-  //   title: "File Systems and I/O Management",
-  //   component: Ch8Content,
-  // },
+  {
+    id: "ch8",
+    title: "File Systems and I/O Management",
+    component: Ch8Content,
+  },
 ];
 
 type ChapterProps = {

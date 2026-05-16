@@ -20,10 +20,10 @@ export default function Sidebar() {
     { id: "ch2", title: "Process Management" },
     { id: "ch3", title: "CPU Scheduling" },
     { id: "ch4", title: "Process Synchronization" },
-    // { id: "ch5", title: "Deadlocks" },
-    // { id: "ch6", title: "Memory Management" },
-    // { id: "ch7", title: "Paging and Segmentation" },
-    // { id: "ch8", title: "File Systems and I/O Management" },
+    { id: "ch5", title: "Deadlocks" },
+    { id: "ch6", title: "Memory Management" },
+    { id: "ch7", title: "Paging and Segmentation" },
+    { id: "ch8", title: "File Systems and I/O Management" },
   ];
 
   return (
