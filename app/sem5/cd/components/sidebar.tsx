@@ -1,8 +1,9 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import { Righteous } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { chapters } from "../constants";
 
 const righteous = Righteous({
   subsets: ["latin"],
@@ -15,26 +16,13 @@ export default function Sidebar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (window.innerWidth >= 768) {
+    if (typeof window !== "undefined" && window.innerWidth >= 768) {
       setOpen(true);
     }
   }, []);
 
-  const chapters = [
-    { id: "ch0", title: "Course Outline" },
-    { id: "ch1", title: "Arrays" },
-    { id: "ch2", title: "Linked Lists" },
-    { id: "ch3", title: "Stacks" },
-  ];
-
   const quizSlugMap: Record<string, string> = {
-    c: "c-programming",
-    em1: "em1",
-    ep: "ep",
-    em2: "em2",
-    oops: "oops",
-    os: "os",
-    dops: "dops",
+    cd: "cd",
   };
 
   const subjectKey = pathname.split("/")[2] ?? "";
@@ -45,16 +33,17 @@ export default function Sidebar() {
   return (
     <>
       {/* Backdrop overlay - only on mobile when open */}
-      <div
+      <div 
         className={`fixed inset-0 md:hidden bg-black/50 z-30 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         onClick={() => setOpen(false)}
       />
-
+      
       <div className="flex sticky top-14 z-40 h-[calc(100vh-3.5rem)] w-[50px] md:w-auto pointer-events-none md:pointer-events-auto">
         {/* Sidebar */}
         <aside
-          className={`h-full shrink-0 bg-[#fae8d7] text-[#1B0D00] p-0 flex flex-col transition-all duration-300 pointer-events-auto border-r-0 ${open ? "w-64 border-r-2 md:border-r-0" : "w-0 overflow-hidden"
-            }`}
+          className={`h-full shrink-0 bg-[#fae8d7] text-[#1B0D00] p-0 flex flex-col transition-all duration-300 pointer-events-auto border-r-0 ${
+            open ? "w-64 border-r-2 md:border-r-0" : "w-0 overflow-hidden"
+          }`}
         >
           <h2
             className="flex items-center text-2xl font-normal pt-3 pl-3 mb-2 bg-[#cebb9c] text-[#1B0D00] pb-2 border-b-4 border-[#1B0D00]"
@@ -62,18 +51,42 @@ export default function Sidebar() {
           >
             Chapters
           </h2>
-          <ul className="flex-1 overflow-y-auto space-y-0">
+          <ul className="flex-1 overflow-y-auto no-scrollbar space-y-0">
             {chapters.map((ch) => {
-              const active = pathname === `/sem2/dsc/${ch.id}`;
+              const active =
+                pathname === `/sem5/cd/${ch.id}` ||
+                (ch.subTopics?.some(
+                  (sub) => sub.isPage && pathname === `/sem5/cd/${sub.id}`
+                ) ?? false);
               return (
-                <li key={ch.id}>
+                <li key={ch.id} className="flex flex-col">
                   <Link
-                    href={`/sem2/dsc/${ch.id}`}
-                    className={`block px-3 py-2 text-xl transition ${active ? "bg-[#fccc7e]" : "hover:bg-[#ffdda7af]"
-                      } ${righteous.className}`}
+                    href={`/sem5/cd/${ch.id}`}
+                    className={`block px-3 py-2 text-xl transition ${
+                      active ? "bg-[#fccc7e]" : "hover:bg-[#ffdda7af]"
+                    } ${righteous.className}`}
                   >
                     {ch.title}
                   </Link>
+                  {active && ch.subTopics && (
+                    <ul className="ml-4 border-l-2 border-[#1B0D00]/20 pl-2 my-2 space-y-2">
+                      {ch.subTopics.map((sub) => {
+                        const subActive = sub.isPage && pathname === `/sem5/cd/${sub.id}`;
+                        return (
+                          <li key={sub.id}>
+                            <Link
+                              href={sub.isPage ? `/sem5/cd/${sub.id}` : `/sem5/cd/${ch.id}#${sub.id}`}
+                              className={`block text-sm transition hover:font-bold ${
+                                subActive ? "text-black font-bold" : "text-[#3a2a14] hover:text-black"
+                              }`}
+                            >
+                              {sub.title}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </li>
               );
             })}
@@ -88,8 +101,9 @@ export default function Sidebar() {
             </h2>
             <Link
               href={quizHref}
-              className={`flex items-center gap-2 px-3 py-2 text-xl transition ${quizActive ? "bg-[#fccc7e]" : "hover:bg-[#ffdda7af]"
-                } ${righteous.className}`}
+              className={`flex items-center gap-2 px-3 py-2 text-xl transition ${
+                quizActive ? "bg-[#fccc7e]" : "hover:bg-[#ffdda7af]"
+              } ${righteous.className}`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
